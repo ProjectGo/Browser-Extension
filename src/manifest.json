@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+
+  "name": "Go",
+  "version": "1.0.0",
+
+  "description": "Browser extension for Go app.",
+  "author": "Alexander Baygeldin",
+
+  "background": {
+    "scripts": ["js/background.js"],
+    "persistent": true
+  },
+
+  "permissions": [
+    "tabs",
+    "notifications",
+    "alarms",
+    "storage",
+    "background",
+    "http://oauth.vk.com/*",
+    "https://oauth.vk.com/*"
+  ],
+
+  "icons": {"16": "img/16.png", "48": "img/48.png", "128": "img/128.png"},
+
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

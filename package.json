@@ -1,0 +1,39 @@
+{
+  "name": "go-app-browser",
+  "version": "1.0.0",
+  "description": "Browser extension for Go app.",
+  "main": "index.js",
+  "scripts": {
+    "build:dev": "gulp",
+    "build:release": "gulp release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProjectGo/Browser-Extension.git"
+  },
+  "keywords": [
+    "go-app",
+    "chrome",
+    "firefox",
+    "extension"
+  ],
+  "author": "Alexander Baygeldin",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/ProjectGo/Browser-Extension/issues"
+  },
+  "homepage": "https://github.com/ProjectGo/Browser-Extension#readme",
+  "devDependencies": {
+    "browserify": "^10.2.4",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^0.15.0",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "lodash": "^3.10.0",
+    "react": "^0.13.3",
+    "react-router": "^0.13.3"
+  }
+}
