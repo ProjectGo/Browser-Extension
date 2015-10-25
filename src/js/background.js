@@ -1,34 +1,6 @@
+import { API } from './core/helpers/config';
+
 var authTabId, kostil; //ужас
-var server = "http://projectgo-servergo.rhcloud.com/";
-
-/**
- * Retrieve a value of a parameter from the given URL string
- *
- * @param  {string} url           Url string
- * @param  {string} parameterName Name of the parameter
- *
- * @return {string}               Value of the parameter
- */
-function getUrlParameterValue(url, parameterName) {
-  "use strict";
-
-  var urlParameters  = url.substr(url.indexOf("#") + 1),
-      parameterValue = "",
-      index,
-      temp;
-
-  urlParameters = urlParameters.split("&");
-
-  for (index = 0; index < urlParameters.length; index += 1) {
-    temp = urlParameters[index].split("=");
-
-    if (temp[0] === parameterName) {
-      return temp[1];
-    }
-  }
-
-  return parameterValue;
-}
 
 chrome.notifications.onClicked.addListener(function (id) {
     chrome.notifications.clear(id);
@@ -38,14 +10,18 @@ chrome.notifications.onClicked.addListener(function (id) {
     });
 });
 
-//пару хандлеров для ajax запросов на сервер для ДА и нЕТ, а еще закрыть нотифицацию
+chrome.notifications.onButtonClicked.addListener(function (id, button) {
+  chrome.notifications.clear(id);
+
+  //отправляет запрос на сервер в зависимости от кнопки
+});
 
 chrome.storage.onChanged.addListener(function (changes) {
   chrome.storage.local.get('access_token', function (result) {
     if (result.access_token) {
       kostil = setInterval(function () {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', server + 'events', true);
+        xhr.open('GET', API + 'events', true);
         xhr.setRequestHeader('token', result.access_token);
         xhr.send();
         xhr.onreadystatechange = function() {
@@ -57,7 +33,8 @@ chrome.storage.onChanged.addListener(function (changes) {
             type: 'basic',
             iconUrl: 'img/48.png',
             title: 'Go!',
-            message: `${description} at ${place}! ${time}`,
+            //message: `${description} at ${place}! ${time}`,
+            message: 'Идем гулять на петроградке, сейчас.',
             isClickable: true,
             buttons: [{ title: 'Иду' }, { title: 'Не иду' }]
           });
@@ -87,7 +64,6 @@ chrome.tabs.onUpdated.addListener(function handler(tabId, changeInfo) {
 });
 
 chrome.runtime.onInstalled.addListener(function () {
-  //chrome.tabs.create({ url: "chrome://extensions/?options=" + chrome.runtime.id, active: true });
   var authUrl = 'https://oauth.vk.com/authorize?client_id=5118943&scope=friends,offline&' +
       'redirect_uri=http%3A%2F%2Foauth.vk.com%2Fblank.html&display=page&response_type=token';
 
@@ -98,3 +74,19 @@ chrome.runtime.onInstalled.addListener(function () {
   console.log(a);
 
 });
+
+function getUrlParameterValue(url, parameterName) {
+  var temp, index, parameterValue, urlParameters;
+
+  urlParameters = url.substr(url.indexOf("#") + 1).split("&");
+
+  for (index = 0; index < urlParameters.length; index += 1) {
+    temp = urlParameters[index].split("=");
+
+    if (temp[0] === parameterName) {
+      return temp[1];
+    }
+  }
+
+  return parameterValue;
+}

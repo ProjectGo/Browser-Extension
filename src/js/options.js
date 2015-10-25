@@ -4,7 +4,7 @@ window.addEventListener('load', function() {
     if (result.access_token) {
       wrap.innerHTML = '<a href="#">Выйти</a>';
     } else {
-      wrap.innerHTML = '<a href="#">Подключить ВК</a>';
+      wrap.innerHTML = '<a href="#">Подключить Вконтакте</a>';
     }
   });
 });

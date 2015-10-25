@@ -8,6 +8,5 @@ export function go(user) {
 
 export function no(user) {
     //обращение к апи c user.access_token
-    console.log('я обращаюсь к апи НЕ ПОЙДУ');
     return { type: NO, user };
 }

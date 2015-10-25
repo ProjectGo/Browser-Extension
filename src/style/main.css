@@ -1,25 +1,65 @@
-/**
- * Copyright (c) 2011 The Chromium Authors. All rights reserved.
- * Use of this source code is governed by a BSD-style license that can be
- * found in the LICENSE file.
- */
-
-/* Clone the look and feel of "chrome://" pages. */
 body {
   margin: 10px;
-  font: 84% Arial, sans-serif
+  font: 14px Arial, sans-serif;
+  color: #2f2f2f;
+  background-color: #B2DFDB;
 }
 
-h1 { font-size: 156% }
-
-h1 img {
-  margin: 1px 5px 0 1px;
-  vertical-align: middle
+h1 {
+  font-size: 15px;
+  margin: 15px 0px 10px 0px;
+  padding: 0;
+  color: #00897B;
 }
 
-h2 {
-  border-top: 1px solid #9cc2ef;
-  background-color: #ebeff9;
-  padding: 3px 5px;
-  font-size: 100%
+#wrap {
+  width: 600px;
+  margin: 30px auto;
+  border-radius: 20px;
+  background: #fff url('../img/logo.png') 115% -25% no-repeat;
+  background-size: 300px;
+  padding: 30px;
+}
+
+a.decision {
+  font-size: 20px;
+  margin-right: 15px;
+  display: inline-block;
+  color: #00695C;
+  border-bottom: 1px dashed #00695C;
+  text-decoration: none;
+}
+
+a.decision:hover {
+  display: inline-block;
+  color: #00695C;
+  border-bottom: none;
+}
+
+li {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  margin: 2px;
+  padding: 0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+li :hover {
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(51, 153, 204, 0.70);
+}
+
+li img {
+  width: 60px;
+  height: 60px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-weight: bold;
 }

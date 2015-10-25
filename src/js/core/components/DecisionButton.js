@@ -3,9 +3,9 @@ import React, { Component, PropTypes } from 'react';
 export default class DecisionButton extends Component {
     render() {
         return (
-            <button onClick={(e) => this.handleClick(e)}>
+            <a className="decision" href="#" onClick={(e) => this.handleClick(e)}>
                 {this.props.name}
-            </button>
+            </a>
         );
     }
 

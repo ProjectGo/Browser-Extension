@@ -1,5 +1,6 @@
 "use strict";
 
+var fs = require('fs');
 var gulp = require('gulp');
 var browserify = require('browserify');
 var babelify = require('babelify');
@@ -7,6 +8,7 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var lint = require('gulp-eslint');
 var uglify = require('gulp-uglify');
+var crx = require('gulp-crx');
 
 var config = {
 	paths: {
@@ -73,6 +75,15 @@ gulp.task('watch', function() {
 	gulp.watch(config.paths.style, ['style']);
 	gulp.watch(config.paths.js, ['js'/*, 'lint'*/]);
 	gulp.watch(config.paths.manifest, ['manifest']);
+});
+
+gulp.task('crx', function() {
+	return gulp.src('./build')
+		.pipe(crx({
+			privateKey: fs.readFileSync('./dist/go-app.pem', 'utf8'),
+			filename: 'go-app.crx'
+		}))
+		.pipe(gulp.dest('./dist'));
 });
 
 gulp.task('default', ['html', 'js', 'style', 'images', 'manifest', /*'lint',*/ 'watch']);
