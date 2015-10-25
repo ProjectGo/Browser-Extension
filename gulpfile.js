@@ -2,9 +2,11 @@
 
 var gulp = require('gulp');
 var browserify = require('browserify');
-var reactify = require('reactify');
+var babelify = require('babelify');
 var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 var lint = require('gulp-eslint');
+var uglify = require('gulp-uglify');
 
 var config = {
 	paths: {
@@ -15,7 +17,12 @@ var config = {
 		images: './src/img/*',
 		style: './src/style/*.css',
 		favicon: './src/favicon.ico',
-		manifest: './src/manifest.json'
+		manifest: './src/manifest.json',
+		entries: [
+			'background.js',
+			'event.js',
+			'options.js'
+		]
 	}
 };
 
@@ -25,26 +32,21 @@ gulp.task('html', function() {
 });
 
 gulp.task('js', function() {
-	browserify(config.paths.root + '/js/event.js')
-		.transform(reactify)
-		.bundle()
-		.on('error', console.error.bind(console))
-		.pipe(source('event.js'))
-		.pipe(gulp.dest(config.paths.build + '/js'));
-
-	browserify(config.paths.root + '/js/background.js')
-		.bundle()
-		.on('error', console.error.bind(console))
-		.pipe(source('background.js'))
-		.pipe(gulp.dest(config.paths.build + '/js'));
-
-	gulp.src(config.paths.root + '/js/options.js')
-		.pipe(gulp.dest(config.paths.build + '/js'));
+	config.paths.entries.forEach(function (entry) {
+		browserify(config.paths.root + '/js/' + entry)
+			.transform(babelify)
+			.bundle()
+			.on('error', console.error.bind(console))
+			.pipe(source(entry))
+			.pipe(buffer())
+			.pipe(uglify())
+			.pipe(gulp.dest(config.paths.build + '/js'));
+	});
 });
 
-gulp.task('css', function() {
+gulp.task('style', function() {
 	gulp.src(config.paths.style)
-		.pipe(gulp.dest(config.paths.build + '/css'));
+		.pipe(gulp.dest(config.paths.build + '/style'));
 });
 
 gulp.task('manifest', function() {
@@ -68,9 +70,9 @@ gulp.task('lint', function() {
 
 gulp.task('watch', function() {
 	gulp.watch(config.paths.html, ['html']);
-	gulp.watch(config.paths.style, ['css']);
+	gulp.watch(config.paths.style, ['style']);
 	gulp.watch(config.paths.js, ['js'/*, 'lint'*/]);
 	gulp.watch(config.paths.manifest, ['manifest']);
 });
 
-gulp.task('default', ['html', 'js', 'css', 'images', 'manifest', /*'lint',*/ 'watch']);
+gulp.task('default', ['html', 'js', 'style', 'images', 'manifest', /*'lint',*/ 'watch']);
