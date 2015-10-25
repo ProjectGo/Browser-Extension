@@ -12,14 +12,14 @@ function statistics(state = init, action = MAYBE) {
     switch (action.type) {
         case GO:
             return {
-                go: state.go.push(action.userID),
+                go: state.go.push(action.user.userID),
                 no: state.no,
                 maybe: state.maybe
             };
         case NO:
             return {
                 go: state.go,
-                no: state.no.push(action.userID),
+                no: state.no.push(action.user.userID),
                 maybe: state.maybe
             };
         default:
