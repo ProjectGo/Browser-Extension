@@ -1,10 +1,12 @@
 {
   "ecmaFeatures": {
+    "modules": true,
     "jsx": true
   },
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "es6": true
   },
   "rules": {
     "quotes": 0,
@@ -13,6 +15,13 @@
     "no-unused-vars": 0,
     "no-underscore-dangle": 0,
     "no-alert": 0,
-    "no-lone-blocks": 0
+    "no-lone-blocks": 0,
+    "camelcase": [2, {"properties": "never"}],
+    "new-cap": [2, {
+      "capIsNewExceptions": ["List"]
+    }]
+  },
+  "globals": {
+    "chrome": true
   }
 }

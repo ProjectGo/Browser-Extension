@@ -25,7 +25,7 @@ chrome.storage.onChanged.addListener(function (changes) {
         xhr.setRequestHeader('token', result.access_token);
         xhr.send();
         xhr.onreadystatechange = function() {
-          if (this.readyState != 4) { return; }
+          if (this.readyState !== 4) { return; }
 
           let {description, place, time} = JSON.parse(this.responseText)[0];
 
@@ -48,7 +48,7 @@ chrome.storage.onChanged.addListener(function (changes) {
 });
 
 chrome.tabs.onUpdated.addListener(function handler(tabId, changeInfo) {
-  if(tabId == authTabId && changeInfo.url != undefined && changeInfo.status == "loading") {
+  if(tabId === authTabId && changeInfo.url && changeInfo.status === "loading") {
     if (changeInfo.url.indexOf('oauth.vk.com/blank.html') > -1) {
       var vkAccessToken = getUrlParameterValue(changeInfo.url, 'access_token');
 
@@ -70,8 +70,6 @@ chrome.runtime.onInstalled.addListener(function () {
   chrome.tabs.create({ url: authUrl, active: true }, function(tab) {
     authTabId = tab.id;
   });
-
-  console.log(a);
 
 });
 

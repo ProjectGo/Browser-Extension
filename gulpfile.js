@@ -73,7 +73,7 @@ gulp.task('lint', function() {
 gulp.task('watch', function() {
 	gulp.watch(config.paths.html, ['html']);
 	gulp.watch(config.paths.style, ['style']);
-	gulp.watch(config.paths.js, ['js'/*, 'lint'*/]);
+	gulp.watch(config.paths.js, ['js', 'lint']);
 	gulp.watch(config.paths.manifest, ['manifest']);
 });
 
@@ -86,4 +86,4 @@ gulp.task('crx', function() {
 		.pipe(gulp.dest('./dist'));
 });
 
-gulp.task('default', ['html', 'js', 'style', 'images', 'manifest', /*'lint',*/ 'watch']);
+gulp.task('default', ['html', 'js', 'style', 'images', 'manifest', 'lint', 'watch']);

@@ -8,13 +8,13 @@ import DecisionButton from '../components/DecisionButton';
 
 class App extends Component {
     render() {
-        const { dispatch, go:goList, no:noList, maybe:maybeList } = this.props;
+        const { dispatch, go: goList, no: noList, maybe: maybeList } = this.props;
 
         return (
             <div>
                 <p>Идем гулять на петроградке, сейчас.</p>
-                <DecisionButton  onClick={nextFilter => dispatch(go(nextFilter))} name="Я иду!"/>
-                <DecisionButton  onClick={nextFilter => dispatch(no(nextFilter))} name="Не сегодня." />
+                <DecisionButton onClick={nextFilter => dispatch(go(nextFilter))} name="Я иду!"/>
+                <DecisionButton onClick={nextFilter => dispatch(no(nextFilter))} name="Не сегодня." />
                 <h1>Идут:</h1>
                 <PeopleList list={goList} />
                 <h1>Не идут:</h1>

@@ -6,7 +6,7 @@ import App from './core/containers/App';
 import statistics from './core/reducers';
 
 chrome.runtime.onMessage.addListener(request => {
-    if (request.action == 'focus_window') {
+    if (request.action === 'focus_window') {
         window.focus();
     }
 });

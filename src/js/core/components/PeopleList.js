@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { avatars } from '../helpers/hacks'
-import _ from 'lodash'
+import { avatars } from '../helpers/hacks';
+import _ from 'lodash';
 
 export default class PeopleList extends Component {
     render() {

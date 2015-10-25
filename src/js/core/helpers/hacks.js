@@ -25,4 +25,4 @@ let avatars = [
     'http://40.media.tumblr.com/0e47be35f8ec957dc311eaf4e7e4d2a7/tumblr_nluf8hIFvD1rpwm80o1_250.jpg'
 ];
 
-export { avatars }
+export { avatars };
